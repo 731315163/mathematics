@@ -10,3 +10,9 @@ dependencies = [
     "scipy",
     "statsmodels>=0.14.4",
 ]
+[project.optional-dependencies]
+dev = [
+  "pytest",           # 开发依赖
+  "pytest-cov",       # 测试覆盖率工具
+]
+
