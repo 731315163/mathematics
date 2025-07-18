@@ -4,8 +4,14 @@ import pytest
 
 import mathematics as ma  # 从mathefun模块导入divide函数
 from mathematics import divide
-
-
+@pytest.mark.parametrize("x, a_min,a_max, expected", [
+    (5,2, 20, 5),
+    (1.5,3, 2, 2),
+    (-1,-1, 1, -1),
+])
+def test_clip(x,a_min,a_max, expected):
+    cv = np.clip(x, a_min, a_max)
+    assert cv == expected
 # 测试标量除法
 def test_divide_scalars():
     assert ma.divide(x=10, y=2) == 5

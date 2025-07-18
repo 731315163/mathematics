@@ -31,6 +31,7 @@ T = TypeVar(
 
 
 if sys.version_info < (3, 10):
+    from typing_extensions import Union
     SequenceGenericType: TypeAlias = "Union[MutableSequence[T], Sequence[T],NDArray]"
 else:
     SequenceGenericType: TypeAlias = MutableSequence[T] | Sequence[T] | np.ndarray
