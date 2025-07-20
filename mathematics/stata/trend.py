@@ -1,14 +1,12 @@
 import math
 from scipy import stats
 import numpy as np
-import pandas as pd
-from numpy.typing import NDArray
-from ..metric import MAE
-from . import SequenceGenericType
+from mathematics.metric import MAE
+from mathematics.type import SequenceGenericType
 
 SequenceType = SequenceGenericType[int | float | np.number]
 
-def MinMax(seq:SequenceType):
+def min_max(seq:SequenceType):
     norma = np.asarray(seq)
     min_val, max_val = np.min(norma), np.max(norma)
     normalized = (norma - min_val) / (max_val - min_val)
@@ -38,8 +36,8 @@ def linregress(x:SequenceType|tuple,y:SequenceType,err=None):
     else:
         if len(x) != len(y):
             raise ValueError("x and y must have the same length")
-        x_normal,min_x,max_x = MinMax(x)
-    y_normal,min_y,max_y = MinMax(y)
+        x_normal,min_x,max_x = min_max(x)
+    y_normal,min_y,max_y = min_max(y)
     
     slope_norm, intercept_norm, r_value, p_value, _ = stats.linregress(x_normal, y_normal)
     scale_y = max_y - min_y
@@ -339,6 +337,6 @@ def trend_momentum_hlatr(
     return Directions
 
 
-def trend_df(df: pd.DataFrame, atr:str="atr" , high: str = "high", low: str = "low"):
+# def trend_df(df: pd.DataFrame, atr:str="atr" , high: str = "high", low: str = "low"):
 
-    return trend_hlatr(high=df[high].to_numpy(), low=df[low].to_numpy(), atr=atr)
+#     return trend_hlatr(high=df[high].to_numpy(), low=df[low].to_numpy(), atr=atr)

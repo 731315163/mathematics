@@ -4,14 +4,13 @@ from datetime import datetime, timedelta
 from typing import Any, TypeAlias, TypeVar
 
 import numpy as np
-import pandas as pd
 from numpy.typing import NDArray
 
-DatetimeType: TypeAlias = datetime | np.datetime64 | pd.Timestamp
+DatetimeType: TypeAlias = datetime | np.datetime64 
 
-TimedeltaType: TypeAlias = timedelta | np.timedelta64 | pd.Timedelta
+TimedeltaType: TypeAlias = timedelta | np.timedelta64 
 
-SequenceType: TypeAlias = MutableSequence | Sequence | NDArray
+SequenceType: TypeAlias = MutableSequence | Sequence | np.ndarray
 
 
 T = TypeVar(
@@ -24,8 +23,7 @@ T = TypeVar(
     timedelta,
     np.datetime64,
     np.timedelta64,
-    pd.Timestamp,
-    pd.Timedelta,
+   
     Any,
 )
 

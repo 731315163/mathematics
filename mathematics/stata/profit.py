@@ -1,9 +1,9 @@
 import math
-from typing import Literal, TypeAlias
+from typing import TypeAlias
 
 import numpy as np
 
-from . import SequenceGenericType
+from mathematics.type import SequenceGenericType
 
 PriceVolume: TypeAlias = (
     tuple[float, float] | tuple[int, int] | tuple[np.number, np.number]

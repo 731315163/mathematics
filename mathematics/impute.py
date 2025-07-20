@@ -11,7 +11,6 @@ from typing import Literal
 # import arch.data
 # import arch.unitroot
 import numpy as np
-import pandas as pd
 from scipy.interpolate import CubicHermiteSpline, interp1d
 
 
@@ -300,37 +299,37 @@ def linear_interpolator(x):
     return data_interp
 
 
-def akima_impute_df(
-    df: pd.DataFrame,
-    columns: Sequence[str] | None = None,
-    method: Literal["akima", "makima"] = "makima",
-):
-    df.replace({None: np.nan}, inplace=True)
-    if columns is None or len(columns) <= 0:
-        columns = list(df.columns)
-    for col in columns:
-        if not df[col].isna().any() or df[col].dtype not in numeric_types:
-            continue
-        # 获取非缺失值的索引和值
-        copy_values = pd.Series(df[col])
-        copy_values.reset_index(drop=True, inplace=True)
-        vaild = copy_values.dropna()
-        valid_indices = vaild.index
-        valid_values = vaild.values
+# def akima_impute_df(
+#     df: pd.DataFrame,
+#     columns: Sequence[str] | None = None,
+#     method: Literal["akima", "makima"] = "makima",
+# ):
+#     df.replace({None: np.nan}, inplace=True)
+#     if columns is None or len(columns) <= 0:
+#         columns = list(df.columns)
+#     for col in columns:
+#         if not df[col].isna().any() or df[col].dtype not in numeric_types:
+#             continue
+#         # 获取非缺失值的索引和值
+#         copy_values = pd.Series(df[col])
+#         copy_values.reset_index(drop=True, inplace=True)
+#         vaild = copy_values.dropna()
+#         valid_indices = vaild.index
+#         valid_values = vaild.values
 
-        # 获取这些值的x坐标（在这种情况下，我们只是使用它们的索引）
-        x = valid_indices.values
+#         # 获取这些值的x坐标（在这种情况下，我们只是使用它们的索引）
+#         x = valid_indices.values
 
-        # 创建Akima插值器
-        interpolator = Akima1DInterpolator(x, valid_values, method=method)
+#         # 创建Akima插值器
+#         interpolator = Akima1DInterpolator(x, valid_values, method=method)
 
-        # 创建一个新的x坐标数组，用于插值（例如，所有的索引）
-        x_new = np.arange(df.shape[0])
+#         # 创建一个新的x坐标数组，用于插值（例如，所有的索引）
+#         x_new = np.arange(df.shape[0])
 
-        # 使用插值器计算新的y值
+#         # 使用插值器计算新的y值
 
-        y_new = interpolator(x_new)
+#         y_new = interpolator(x_new)
 
-        # 用新的y值替换原始DataFrame中的缺失值
-        df.loc[df[col].isna(), col] = y_new[df[col].isna()]
-    return df
+#         # 用新的y值替换原始DataFrame中的缺失值
+#         df.loc[df[col].isna(), col] = y_new[df[col].isna()]
+#     return df

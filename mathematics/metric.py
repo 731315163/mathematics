@@ -1,5 +1,5 @@
 import numpy as np
-from .type import SequenceType
+from mathematics.type import SequenceType
 def R2(y_true:SequenceType, y_pred:SequenceType):
     """
     计算R²（确定系数）

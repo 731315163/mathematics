@@ -1,4 +1,3 @@
-from ..type import DatetimeType, SequenceGenericType, SequenceType, TimedeltaType
 from .profit import (
     PriceVolume,
     Cache_Profit,
@@ -11,12 +10,11 @@ from .profit import (
 from .trend import (
     linregress,
     slopeR,
-    trend_df,
     trend_hl,
     trend_hlatr,
     trend_momentum_hlatr,
     trend_num,
     trend_segments,
-    MinMax,
+    min_max,
     corrcoef
 )

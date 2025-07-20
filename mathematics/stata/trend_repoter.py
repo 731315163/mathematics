@@ -1,7 +1,7 @@
 import numpy as np
 
-from ..metric import MAE, MAPE, MSE, R2
-from ..type import SequenceType
+from mathematics.metric import MAE, MAPE, MSE, R2
+from mathematics.type import SequenceType
 from .trend import (
     trend_hl,
     trend_hlatr,

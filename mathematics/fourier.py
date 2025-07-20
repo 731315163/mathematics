@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.fft import fft, ifft
 
-from .type import SequenceType
+from mathematics.type import SequenceType
 
 
 def fit_fourier(y: SequenceType, num_freqs=None):
