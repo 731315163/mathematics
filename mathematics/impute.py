@@ -1,9 +1,7 @@
 """Interpolation algorithms using piecewise cubic polynomials."""
 
-from __future__ import annotations
 
 import warnings
-from collections.abc import Sequence
 from typing import Literal
 
 # import arch.covariance
@@ -12,6 +10,34 @@ from typing import Literal
 # import arch.unitroot
 import numpy as np
 from scipy.interpolate import CubicHermiteSpline, interp1d
+from mathematics.type import SequenceType
+def forward_fill(arr:SequenceType, fill_first=False):
+    """
+    用前一个非 NaN 值填充连续的 。
+
+    参数:
+        arr (np.ndarray): 输入的 NumPy 数组。
+        fill_first (bool): 是否填充最前面的 NaN，默认为 False。
+
+    返回:
+        np.ndarray: 填充后的数组。
+    """
+    arr = np.asarray(arr)
+    mask = np.isfinite(arr)
+
+    if not mask.any():
+        return arr.copy()
+
+    idx = np.where(mask, np.arange(len(arr)), -1)
+    # 生成前向填充索引
+    np.maximum.accumulate(idx, out=idx)
+    first_valid_idx = mask.argmax()
+    idx[:first_valid_idx] = first_valid_idx
+    result = arr[idx]
+    if not fill_first:
+        result[:first_valid_idx] = np.nan
+
+    return result
 
 
 def prepare_input(x, y, axis, dydx=None):
