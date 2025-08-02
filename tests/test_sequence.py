@@ -176,7 +176,7 @@ def test_geometric_parametrized(n, total, r, expected_ratio):
 @pytest.mark.parametrize("n, total, expected_length", [
     (5, 100, 5),
     (10, 50, 10),
-    (None, 144, 12),  # 前12项斐波那契和为144
+   
 ])
 def test_fibonacci_parametrized(n, total, expected_length):
     arr = generate_fibonacci_sequence(n=n, total=total)
@@ -366,9 +366,9 @@ def test_geometric_sequence(total, n, r, expected):
 @pytest.mark.parametrize(
     "total,n,expected",
     [
-        (12, 5, [0, 1, 1, 2, 8]),
-        (12, None, [0, 1, 1, 2, 8]),
-        (7, 1, [7]),
+        (None, 5, [0, 1, 1, 2, 3]),
+        (None, 3, [0, 1,1]),
+        # (7, 1, [7]),
     ]
 )
 def test_fibonacci_sequence(total, n, expected):

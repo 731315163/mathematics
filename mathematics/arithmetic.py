@@ -123,23 +123,22 @@ def generate_geometric_sequence(total,n=None, r=None ):
     
     
 
-def generate_fibonacci_sequence( total,n:int):
+def generate_fibonacci_sequence( n:int,total=None):
     """
     生成斐波那契数组（按比例缩放以满足总和要求）
     n: 元素个数
     total: 数组元素总和
     """
-    if n <= 0:
-        return np.array([])
-    elif n == 1:
-        return np.array([total])
+    if n <= 2:
+        raise ValueError("n必须大于2")
     
     # 生成标准斐波那契数列
     fib = np.zeros(n, dtype=np.float64)
     fib[0], fib[1] = 0, 1
     for i in range(2, n):
         fib[i] = fib[i-1] + fib[i-2]
-    
+    if total is None:
+        return fib
     # 计算缩放因子
     fib_sum = fib.sum()
     scale_factor = total / fib_sum if fib_sum != 0 else 0
